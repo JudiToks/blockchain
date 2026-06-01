@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crowdfunding DApp</title>
+    <style>
+      :root {
+        --bg: #f6f8ff;
+        --card: #ffffff;
+        --primary: #005bbb;
+        --text: #102a43;
+        --muted: #486581;
+        --ok: #0f9d58;
+        --warn: #b54708;
+      }
+      body { margin: 0; font-family: "Segoe UI", Tahoma, sans-serif; background: linear-gradient(120deg, #e4edff, #f8fbff); color: var(--text); }
+      .wrap { max-width: 850px; margin: 28px auto; padding: 0 16px; }
+      .card { background: var(--card); border-radius: 5px; padding: 20px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06); margin-bottom: 16px; }
+      h1 { margin-top: 0; }
+      .row { display: flex; gap: 10px; flex-wrap: wrap; }
+      input, button { padding: 10px; border-radius: 5px; border: 1px solid #d8e0ea; }
+      button { background: var(--primary); color: white; border: none; cursor: pointer; }
+      button.secondary { background: #334e68; }
+      .status { font-weight: 700; }
+      .ok { color: var(--ok); }
+      .warn { color: var(--warn); }
+      small { color: var(--muted); }
+      code { background: #eef4ff; padding: 2px 6px; border-radius: 6px; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="card">
+        <h1>Crowdfunding DApp</h1>
+        <p>Projet mini blockchain: financement participatif on-chain (Sepolia).</p>
+        <div class="row">
+          <button id="connectBtn">Connecter MetaMask</button>
+          <span id="account">Non connecté</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Configuration</h2>
+        <label>Adresse du contrat Sepolia</label>
+        <input id="contractAddress" style="width:100%" placeholder="0x..." />
+        <small>Renseigne l'adresse déployée depuis Remix/Hardhat.</small>
+      </div>
+
+      <div class="card">
+        <h2>Etat de la campagne</h2>
+        <p>Objectif: <span id="goal">-</span> ETH</p>
+        <p>Total levé: <span id="raised">-</span> ETH</p>
+        <p>Deadline (unix): <span id="deadline">-</span></p>
+        <p class="status" id="status">-</p>
+        <button id="refreshBtn" class="secondary">Rafraîchir</button>
+      </div>
+
+      <div class="card">
+        <h2>Contribuer</h2>
+        <div class="row">
+          <input id="amount" placeholder="Montant en ETH" />
+          <button id="contributeBtn">Envoyer</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Actions après deadline</h2>
+        <div class="row">
+          <button id="withdrawBtn">Owner: Retirer les fonds</button>
+          <button id="refundBtn" class="secondary">Contributeur: Demander remboursement</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Logs</h2>
+        <pre id="logs"></pre>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.2/dist/ethers.umd.min.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
